@@ -1,0 +1,21 @@
+/* PuzzleHub base styles — extended by games and the shared design system (see issue #3) */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.site-header {
+  padding: 2rem 1rem 1rem;
+  text-align: center;
+}
+
+.site-footer {
+  padding: 1.5rem 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+}
