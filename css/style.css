@@ -19,3 +19,32 @@ body {
   text-align: center;
   font-size: 0.85rem;
 }
+
+/* Landing page nav (issue #2) — restyled by the shared design system, see issue #3 */
+
+.game-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.game-card {
+  display: block;
+  padding: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.game-card h2 {
+  margin: 0 0 0.5rem;
+}
+
+.game-card p {
+  margin: 0;
+  font-size: 0.9rem;
+}
