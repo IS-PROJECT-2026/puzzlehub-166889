@@ -1,4 +1,37 @@
-/* PuzzleHub base styles — extended by games and the shared design system (see issue #3) */
+/* PuzzleHub shared design system (issue #3)
+   Design tokens below are the single source of truth for color, type, and
+   spacing — game pages should reuse these variables rather than hardcoding
+   new values. */
+
+:root {
+  /* color */
+  --color-bg: #f7f7fb;
+  --color-surface: #ffffff;
+  --color-text: #1c1c24;
+  --color-text-muted: #5b5b6b;
+  --color-primary: #5b4bd6;
+  --color-primary-hover: #4738b8;
+  --color-border: #e0e0ea;
+
+  /* typography */
+  --font-body: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 2rem;
+
+  /* spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+
+  /* misc */
+  --radius: 8px;
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
 
 * {
   box-sizing: border-box;
@@ -6,45 +39,71 @@
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  background: var(--color-bg);
 }
 
 .site-header {
-  padding: 2rem 1rem 1rem;
+  padding: var(--space-5) var(--space-3) var(--space-3);
   text-align: center;
+}
+
+.site-header h1 {
+  margin: 0;
+  font-size: var(--font-size-xl);
+}
+
+.site-header .tagline {
+  margin: var(--space-1) 0 0;
+  color: var(--color-text-muted);
 }
 
 .site-footer {
-  padding: 1.5rem 1rem;
+  padding: var(--space-4) var(--space-3);
   text-align: center;
-  font-size: 0.85rem;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
 }
 
-/* Landing page nav (issue #2) — restyled by the shared design system, see issue #3 */
+/* Landing page nav (issue #2) */
 
 .game-nav {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+  gap: var(--space-3);
   max-width: 720px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: var(--space-3);
 }
 
 .game-card {
   display: block;
-  padding: 1.5rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
   text-decoration: none;
   color: inherit;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.game-card:hover,
+.game-card:focus-visible {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
 }
 
 .game-card h2 {
-  margin: 0 0 0.5rem;
+  margin: 0 0 var(--space-1);
+  font-size: var(--font-size-lg);
+  color: var(--color-primary);
 }
 
 .game-card p {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
 }
