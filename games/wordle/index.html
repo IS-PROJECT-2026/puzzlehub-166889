@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wordle — PuzzleHub</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="wordle.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1><a class="back-link" href="../../index.html">PuzzleHub</a> / Wordle</h1>
+    <p class="tagline">Guess the hidden word in six tries.</p>
+  </header>
+
+  <main class="wordle-app">
+    <div id="wordle-grid" class="wordle-grid" role="grid" aria-label="Guess grid"></div>
+    <p id="wordle-message" class="wordle-message" role="status" aria-live="polite"></p>
+    <div id="wordle-keyboard" class="wordle-keyboard"></div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Built for the IS Project 2026</p>
+  </footer>
+
+  <script src="../../js/scoreboard.js"></script>
+  <script src="wordle.js"></script>
+  <script src="wordle-ui.js"></script>
+</body>
+</html>
