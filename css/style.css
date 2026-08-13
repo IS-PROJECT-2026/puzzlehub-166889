@@ -31,6 +31,11 @@
   --radius: 8px;
   --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08);
   --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  /* game feedback states — shared across Wordle/2048/Memory Match */
+  --color-correct: #4caf50;
+  --color-present: #d6a52b;
+  --color-absent: #787c7f;
 }
 
 * {
