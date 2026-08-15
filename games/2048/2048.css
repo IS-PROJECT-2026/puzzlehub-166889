@@ -17,9 +17,14 @@
 }
 
 .g2048-score {
+  font-family: var(--font-heading);
   font-weight: 700;
   font-size: var(--font-size-lg);
   margin: 0;
+}
+
+.g2048-score.bump {
+  animation: bounce-in 0.3s var(--ease-bounce);
 }
 
 .g2048-board {
@@ -36,12 +41,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
+  border-radius: 8px;
+  font-family: var(--font-heading);
   font-size: var(--font-size-lg);
   font-weight: 700;
   background: var(--color-surface);
   color: var(--color-text);
   transition: background 0.1s ease, color 0.1s ease;
+}
+
+.g2048-tile:not([data-value="0"]) {
+  animation: pop-in 0.15s var(--ease-bounce);
 }
 
 .g2048-tile[data-value="0"] { background: var(--color-surface); }
