@@ -23,15 +23,15 @@
 
 .memory-grid {
   display: grid;
-  grid-template-columns: repeat(4, 4rem);
-  grid-auto-rows: 4rem;
+  grid-template-columns: repeat(4, min(4rem, 18vw));
+  grid-auto-rows: min(4rem, 18vw);
   gap: var(--space-2);
 }
 
 .memory-card {
   position: relative;
-  width: 4rem;
-  height: 4rem;
+  width: min(4rem, 18vw);
+  height: min(4rem, 18vw);
   cursor: pointer;
   perspective: 600px;
 }
