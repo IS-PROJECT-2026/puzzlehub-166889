@@ -1,10 +1,6 @@
 /* Wordle-specific layout — colors/spacing come from the shared design
-   system (css/style.css); this file only adds grid/keyboard structure. */
-
-.back-link {
-  color: inherit;
-  text-decoration: none;
-}
+   system (css/style.css); this file only adds grid/keyboard structure.
+   .back-link lives in css/style.css — all three games' headers use it. */
 
 .wordle-app {
   display: flex;
@@ -70,18 +66,9 @@
   animation: shake 0.4s ease;
 }
 
-.wordle-message {
-  min-height: 1.5rem;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-}
-
-.wordle-message.celebrate {
-  font-size: var(--font-size-lg);
-  font-weight: 700;
-  color: var(--color-primary);
-  animation: bounce-in 0.5s var(--ease-bounce);
-}
+/* .wordle-message and .wordle-key base styles live in the shared
+   css/style.css — they're reused by 2048 and Memory Match too, despite
+   the Wordle-inherited name. Only Wordle-specific modifiers stay here. */
 
 .wordle-keyboard {
   display: flex;
@@ -93,28 +80,6 @@
   display: flex;
   justify-content: center;
   gap: var(--space-1);
-}
-
-.wordle-key {
-  min-width: min(2.25rem, 8vw);
-  padding: var(--space-2) var(--space-1);
-  border: none;
-  border-radius: 999px;
-  background: var(--color-border);
-  color: var(--color-text);
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: transform 0.1s var(--ease-bounce), background 0.15s ease;
-}
-
-.wordle-key:hover {
-  transform: translateY(-2px);
-}
-
-.wordle-key:active {
-  transform: scale(0.9);
 }
 
 .wordle-key.wide {

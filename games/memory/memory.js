@@ -3,7 +3,8 @@
 // issue #10.
 
 const MemoryGame = (() => {
-  const SYMBOLS = ["🍎", "🍋", "🍇", "🍒", "🍉", "🍓", "🍍", "🥝", "🍑", "🥕"];
+  // Icon names (see js/icons.js) — the UI renders each as an inline SVG.
+  const SYMBOLS = ["star", "heart", "sun", "moon", "cloud", "umbrella", "gift", "music", "camera", "rocket"];
   const DEFAULT_PAIRS = 8;
 
   /** Fisher-Yates shuffle — returns a new array, doesn't mutate the input. */

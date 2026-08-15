@@ -120,6 +120,11 @@ body {
   animation: bounce-in 0.5s var(--ease-bounce) both;
 }
 
+.site-header .back-link {
+  color: inherit;
+  text-decoration: none;
+}
+
 .site-header .tagline {
   margin: var(--space-1) 0 0;
   color: var(--color-text-muted);
@@ -171,10 +176,23 @@ body {
   transform: translateY(-1px) scale(0.98);
 }
 
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+}
+
 .game-card .game-icon {
   display: block;
-  font-size: 2rem;
+  width: 2rem;
+  height: 2rem;
   margin-bottom: var(--space-1);
+  color: var(--color-primary);
+}
+
+.game-card .game-icon .icon {
+  width: 100%;
+  height: 100%;
 }
 
 .game-card h2 {
@@ -204,4 +222,53 @@ body {
 
 .btn-fun:active {
   transform: scale(0.92);
+}
+
+/* Shared game status message (win/lose/info text) — used by all three
+   games, named after Wordle since it was introduced there first. */
+
+.wordle-message {
+  min-height: 1.5rem;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.wordle-message.celebrate {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-primary);
+  animation: bounce-in 0.5s var(--ease-bounce);
+}
+
+.wordle-message.celebrate .icon {
+  color: var(--color-accent-2);
+}
+
+/* Shared pill key/button (keyboard keys, restart buttons) — same
+   naming note as .wordle-message above. */
+
+.wordle-key {
+  min-width: min(2.25rem, 8vw);
+  padding: var(--space-2) var(--space-1);
+  border: none;
+  border-radius: 999px;
+  background: var(--color-border);
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.1s var(--ease-bounce), background 0.15s ease;
+}
+
+.wordle-key:hover {
+  transform: translateY(-2px);
+}
+
+.wordle-key:active {
+  transform: scale(0.9);
 }

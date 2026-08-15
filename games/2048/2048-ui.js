@@ -64,7 +64,7 @@
 
     if (!hasWon && Game2048.hasWon(grid)) {
       hasWon = true;
-      messageEl.textContent = "You reached 2048! Keep going for a higher score.";
+      messageEl.innerHTML = `${Icons.svg("sparkles")} You reached 2048! Keep going for a higher score.`;
       messageEl.classList.add("celebrate");
     }
 
