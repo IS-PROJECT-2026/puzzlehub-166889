@@ -86,6 +86,12 @@
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   transform: rotateY(180deg);
+  color: var(--color-primary);
+}
+
+.memory-card-face.front .icon {
+  width: 55%;
+  height: 55%;
 }
 
 .memory-card.matched .memory-card-face.front {

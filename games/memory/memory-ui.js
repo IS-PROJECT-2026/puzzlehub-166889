@@ -32,7 +32,7 @@
 
     const front = document.createElement("div");
     front.className = "memory-card-face front";
-    front.textContent = card.value;
+    front.innerHTML = Icons.svg(card.value);
 
     inner.append(back, front);
     cardEl.appendChild(inner);
@@ -59,7 +59,7 @@
     timer.stop();
     clearInterval(tickHandle);
     updateTimerDisplay();
-    messageEl.textContent = `Solved in ${moves} moves and ${timer.elapsedSeconds()}s!`;
+    messageEl.innerHTML = `${Icons.svg("sparkles")} Solved in ${moves} moves and ${timer.elapsedSeconds()}s!`;
     messageEl.classList.add("celebrate");
     if (typeof Scoreboard !== "undefined") {
       Scoreboard.record("memory", { moves, timeSeconds: timer.elapsedSeconds() });
