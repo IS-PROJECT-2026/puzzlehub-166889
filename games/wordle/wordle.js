@@ -1,19 +1,31 @@
 // PuzzleHub Wordle — game logic (word list, guess validation, letter-state
 // evaluation). The UI/keyboard input that consumes this lands in issue #6.
+//
+// Depends on WORDLE_VALID_WORDS (words.js) being loaded first: it's the
+// ~14.8k-word dictionary that guesses are checked against. ANSWERS below
+// is a much smaller curated pool the *secret* word is drawn from, so
+// answers stay common and guessable while almost any real word is
+// accepted as a guess.
 
 const WordleGame = (() => {
   const WORD_LENGTH = 5;
   const MAX_GUESSES = 6;
 
-  // Small curated answer list — every entry doubles as an accepted guess.
-  const WORD_LIST = [
+  // Set for O(1) lookups — words.js loads first and defines this global.
+  const VALID_WORDS = typeof WORDLE_VALID_WORDS !== "undefined" ? new Set(WORDLE_VALID_WORDS) : null;
+
+  const ANSWERS = [
     "crane", "slate", "pride", "ghost", "flame",
     "brisk", "vivid", "quilt", "mango", "zebra",
     "spork", "glyph", "haunt", "jolly", "knead",
+    "train", "house", "plant", "world", "music",
+    "light", "bread", "chair", "river", "stone",
+    "cloud", "beach", "tiger", "lemon", "sugar",
+    "peace", "dream", "smile", "storm", "plane",
   ];
 
   function pickWord() {
-    return WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)];
+    return ANSWERS[Math.floor(Math.random() * ANSWERS.length)];
   }
 
   /**
@@ -29,7 +41,7 @@ const WordleGame = (() => {
     if (!/^[a-z]+$/.test(normalized)) {
       return { ok: false, reason: "Guess must contain only letters." };
     }
-    if (!WORD_LIST.includes(normalized)) {
+    if (VALID_WORDS && !VALID_WORDS.has(normalized)) {
       return { ok: false, reason: "Not in word list." };
     }
     return { ok: true };
