@@ -56,9 +56,16 @@
     Game2048.addRandomTile(grid);
     render();
 
+    if (result.scoreGained > 0) {
+      scoreEl.classList.remove("bump");
+      void scoreEl.offsetWidth; // restart the animation even on consecutive merges
+      scoreEl.classList.add("bump");
+    }
+
     if (!hasWon && Game2048.hasWon(grid)) {
       hasWon = true;
       messageEl.textContent = "You reached 2048! Keep going for a higher score.";
+      messageEl.classList.add("celebrate");
     }
 
     if (Game2048.isGameOver(grid)) {
@@ -102,6 +109,8 @@
     hasWon = false;
     gameOver = false;
     messageEl.textContent = "";
+    messageEl.classList.remove("celebrate");
+    scoreEl.classList.remove("bump");
     Game2048.addRandomTile(grid);
     Game2048.addRandomTile(grid);
     render();

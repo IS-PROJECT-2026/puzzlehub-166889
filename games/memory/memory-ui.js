@@ -60,6 +60,7 @@
     clearInterval(tickHandle);
     updateTimerDisplay();
     messageEl.textContent = `Solved in ${moves} moves and ${timer.elapsedSeconds()}s!`;
+    messageEl.classList.add("celebrate");
     if (typeof Scoreboard !== "undefined") {
       Scoreboard.record("memory", { moves, timeSeconds: timer.elapsedSeconds() });
     }
@@ -85,6 +86,13 @@
     const [first, second] = flippedIndices;
     const result = MemoryGame.evaluateFlip(deck, first, second);
 
+    if (!result.isMatch) {
+      [first, second].forEach((i) => {
+        const cardEl = gridEl.querySelector(`[data-index="${i}"]`);
+        if (cardEl) cardEl.classList.add("mismatch");
+      });
+    }
+
     setTimeout(() => {
       deck = result.deck;
       flippedIndices = [];
@@ -102,6 +110,7 @@
     locked = false;
     timer = MemoryGame.createTimer();
     messageEl.textContent = "";
+    messageEl.classList.remove("celebrate");
     updateTimerDisplay();
     render();
   }
