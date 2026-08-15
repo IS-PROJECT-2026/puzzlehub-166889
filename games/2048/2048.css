@@ -24,8 +24,8 @@
 
 .g2048-board {
   display: grid;
-  grid-template-columns: repeat(4, 4.5rem);
-  grid-template-rows: repeat(4, 4.5rem);
+  grid-template-columns: repeat(4, min(4.5rem, 18vw));
+  grid-template-rows: repeat(4, min(4.5rem, 18vw));
   gap: var(--space-2);
   padding: var(--space-2);
   background: var(--color-border);
