@@ -1,0 +1,73 @@
+/* 2048-specific layout — colors/spacing come from the shared design
+   system (css/style.css); this file adds board/tile structure plus a
+   per-value tile color scale. */
+
+.g2048-app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+}
+
+.g2048-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.g2048-score {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--font-size-lg);
+  margin: 0;
+}
+
+.g2048-score.bump {
+  animation: bounce-in 0.3s var(--ease-bounce);
+}
+
+.g2048-board {
+  display: grid;
+  grid-template-columns: repeat(4, min(4.5rem, 18vw));
+  grid-template-rows: repeat(4, min(4.5rem, 18vw));
+  gap: var(--space-2);
+  padding: var(--space-2);
+  background: var(--color-border);
+  border-radius: var(--radius);
+}
+
+.g2048-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  background: var(--color-surface);
+  color: var(--color-text);
+  transition: background 0.1s ease, color 0.1s ease;
+}
+
+.g2048-tile:not([data-value="0"]) {
+  animation: pop-in 0.15s var(--ease-bounce);
+}
+
+.g2048-tile[data-value="0"] { background: var(--color-surface); }
+.g2048-tile[data-value="2"] { background: #eee4da; }
+.g2048-tile[data-value="4"] { background: #ede0c8; }
+.g2048-tile[data-value="8"] { background: #f2b179; color: #fff; }
+.g2048-tile[data-value="16"] { background: #f59563; color: #fff; }
+.g2048-tile[data-value="32"] { background: #f67c5f; color: #fff; }
+.g2048-tile[data-value="64"] { background: #f65e3b; color: #fff; }
+.g2048-tile[data-value="128"] { background: #edcf72; color: #fff; font-size: var(--font-size-base); }
+.g2048-tile[data-value="256"] { background: #edcc61; color: #fff; font-size: var(--font-size-base); }
+.g2048-tile[data-value="512"] { background: #edc850; color: #fff; font-size: var(--font-size-base); }
+.g2048-tile[data-value="1024"] { background: #edc53f; color: #fff; font-size: var(--font-size-sm); }
+.g2048-tile[data-value="2048"] { background: var(--color-correct); color: #fff; font-size: var(--font-size-sm); }
+
+.g2048-hint {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2048 — PuzzleHub</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="2048.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1><a class="back-link" href="../../index.html">PuzzleHub</a> / 2048</h1>
+    <p class="tagline">Slide and merge tiles to reach 2048.</p>
+  </header>
+
+  <main class="g2048-app">
+    <div class="g2048-toolbar">
+      <p id="g2048-score" class="g2048-score">Score: 0</p>
+      <button id="g2048-restart" class="wordle-key" type="button">Restart</button>
+    </div>
+    <div id="g2048-board" class="g2048-board" role="grid" aria-label="2048 board"></div>
+    <p id="g2048-message" class="wordle-message" role="status" aria-live="polite"></p>
+    <p class="g2048-hint">Use arrow keys, or swipe on touch devices.</p>
+  </main>
+
+  <footer class="site-footer">
+    <p>Built for the IS Project 2026</p>
+  </footer>
+
+  <script src="../../js/scoreboard.js"></script>
+  <script src="../../js/icons.js"></script>
+  <script src="2048.js"></script>
+  <script src="2048-ui.js"></script>
+</body>
+</html>

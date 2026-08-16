@@ -1,10 +1,6 @@
 /* Wordle-specific layout — colors/spacing come from the shared design
-   system (css/style.css); this file only adds grid/keyboard structure. */
-
-.back-link {
-  color: inherit;
-  text-decoration: none;
-}
+   system (css/style.css); this file only adds grid/keyboard structure.
+   .back-link lives in css/style.css — all three games' headers use it. */
 
 .wordle-app {
   display: flex;
@@ -27,13 +23,13 @@
 }
 
 .wordle-tile {
-  width: 3rem;
-  height: 3rem;
+  width: min(3rem, 15vw);
+  height: min(3rem, 15vw);
   display: flex;
   align-items: center;
   justify-content: center;
   border: 2px solid var(--color-border);
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: var(--font-size-lg);
   font-weight: 700;
   text-transform: uppercase;
@@ -44,6 +40,7 @@
 
 .wordle-tile.filled {
   border-color: var(--color-text-muted);
+  animation: pop-in 0.1s ease;
 }
 
 .wordle-tile.flip {
@@ -61,11 +58,17 @@
 .wordle-tile.present { background: var(--color-present); }
 .wordle-tile.absent { background: var(--color-absent); }
 
-.wordle-message {
-  min-height: 1.5rem;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
+.wordle-tile.correct.tile-bounce {
+  animation: bounce-in 0.4s var(--ease-bounce);
 }
+
+.wordle-row.row-shake {
+  animation: shake 0.4s ease;
+}
+
+/* .wordle-message and .wordle-key base styles live in the shared
+   css/style.css — they're reused by 2048 and Memory Match too, despite
+   the Wordle-inherited name. Only Wordle-specific modifiers stay here. */
 
 .wordle-keyboard {
   display: flex;
@@ -79,21 +82,8 @@
   gap: var(--space-1);
 }
 
-.wordle-key {
-  min-width: 2.25rem;
-  padding: var(--space-2) var(--space-1);
-  border: none;
-  border-radius: 4px;
-  background: var(--color-border);
-  color: var(--color-text);
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
 .wordle-key.wide {
-  min-width: 3.5rem;
+  min-width: min(3.5rem, 12vw);
   font-size: 0.7rem;
 }
 

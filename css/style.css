@@ -1,7 +1,9 @@
-/* PuzzleHub shared design system (issue #3)
-   Design tokens below are the single source of truth for color, type, and
-   spacing — game pages should reuse these variables rather than hardcoding
-   new values. */
+/* PuzzleHub shared design system (issue #3, restyled playful/gamey in
+   issue #35). Design tokens below are the single source of truth for
+   color, type, and spacing — game pages should reuse these variables
+   rather than hardcoding new values. */
+
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap");
 
 :root {
   /* color */
@@ -9,16 +11,19 @@
   --color-surface: #ffffff;
   --color-text: #1c1c24;
   --color-text-muted: #5b5b6b;
-  --color-primary: #5b4bd6;
-  --color-primary-hover: #4738b8;
+  --color-primary: #6c4bd6;
+  --color-primary-hover: #5636c2;
+  --color-accent: #ff5da2;
+  --color-accent-2: #ffb648;
   --color-border: #e0e0ea;
 
   /* typography */
   --font-body: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-heading: "Fredoka", var(--font-body);
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
   --font-size-lg: 1.25rem;
-  --font-size-xl: 2rem;
+  --font-size-xl: 2.25rem;
 
   /* spacing scale */
   --space-1: 0.25rem;
@@ -28,14 +33,17 @@
   --space-5: 2rem;
 
   /* misc */
-  --radius: 8px;
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --radius: 12px;
+  --shadow-card: 0 2px 6px rgba(108, 75, 214, 0.12);
+  --shadow-card-hover: 0 10px 20px rgba(108, 75, 214, 0.22);
 
   /* game feedback states — shared across Wordle/2048/Memory Match */
-  --color-correct: #4caf50;
-  --color-present: #d6a52b;
+  --color-correct: #43b581;
+  --color-present: #f2b134;
   --color-absent: #787c7f;
+
+  /* motion */
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 * {
@@ -47,7 +55,52 @@ body {
   font-family: var(--font-body);
   font-size: var(--font-size-base);
   color: var(--color-text);
-  background: var(--color-bg);
+  background:
+    radial-gradient(circle at 15% 0%, #efe9ff 0%, transparent 45%),
+    radial-gradient(circle at 85% 0%, #ffe9f3 0%, transparent 45%),
+    var(--color-bg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* shared keyframes — reused by game pages */
+
+@keyframes pop-in {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-4deg); }
+  75% { transform: rotate(4deg); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+@keyframes bounce-in {
+  0% { opacity: 0; transform: scale(0.3); }
+  60% { opacity: 1; transform: scale(1.08); }
+  100% { transform: scale(1); }
 }
 
 .site-header {
@@ -57,12 +110,25 @@ body {
 
 .site-header h1 {
   margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 700;
   font-size: var(--font-size-xl);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: bounce-in 0.5s var(--ease-bounce) both;
+}
+
+.site-header .back-link {
+  color: inherit;
+  text-decoration: none;
 }
 
 .site-header .tagline {
   margin: var(--space-1) 0 0;
   color: var(--color-text-muted);
+  animation: fade-up 0.5s ease 0.15s both;
 }
 
 .site-footer {
@@ -76,7 +142,7 @@ body {
 
 .game-nav {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
   gap: var(--space-3);
   max-width: 720px;
   margin: 0 auto;
@@ -92,17 +158,47 @@ body {
   box-shadow: var(--shadow-card);
   text-decoration: none;
   color: inherit;
-  transition: box-shadow 0.15s ease, transform 0.15s ease;
+  transition: box-shadow 0.2s var(--ease-bounce), transform 0.2s var(--ease-bounce);
+  animation: fade-up 0.5s var(--ease-bounce) both;
 }
+
+.game-nav .game-card:nth-child(1) { animation-delay: 0.1s; }
+.game-nav .game-card:nth-child(2) { animation-delay: 0.2s; }
+.game-nav .game-card:nth-child(3) { animation-delay: 0.3s; }
 
 .game-card:hover,
 .game-card:focus-visible {
   box-shadow: var(--shadow-card-hover);
-  transform: translateY(-2px);
+  transform: translateY(-4px) scale(1.03) rotate(-1deg);
+}
+
+.game-card:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+}
+
+.game-card .game-icon {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: var(--space-1);
+  color: var(--color-primary);
+}
+
+.game-card .game-icon .icon {
+  width: 100%;
+  height: 100%;
 }
 
 .game-card h2 {
   margin: 0 0 var(--space-1);
+  font-family: var(--font-heading);
+  font-weight: 600;
   font-size: var(--font-size-lg);
   color: var(--color-primary);
 }
@@ -111,4 +207,68 @@ body {
   margin: 0;
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
+}
+
+/* Shared "juicy" button used across games (restart, keyboard keys, etc.) */
+
+.btn-fun {
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  transition: transform 0.1s var(--ease-bounce), box-shadow 0.1s ease;
+}
+
+.btn-fun:active {
+  transform: scale(0.92);
+}
+
+/* Shared game status message (win/lose/info text) — used by all three
+   games, named after Wordle since it was introduced there first. */
+
+.wordle-message {
+  min-height: 1.5rem;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.wordle-message.celebrate {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-primary);
+  animation: bounce-in 0.5s var(--ease-bounce);
+}
+
+.wordle-message.celebrate .icon {
+  color: var(--color-accent-2);
+}
+
+/* Shared pill key/button (keyboard keys, restart buttons) — same
+   naming note as .wordle-message above. */
+
+.wordle-key {
+  min-width: min(2.25rem, 8vw);
+  padding: var(--space-2) var(--space-1);
+  border: none;
+  border-radius: 999px;
+  background: var(--color-border);
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.1s var(--ease-bounce), background 0.15s ease;
+}
+
+.wordle-key:hover {
+  transform: translateY(-2px);
+}
+
+.wordle-key:active {
+  transform: scale(0.9);
 }

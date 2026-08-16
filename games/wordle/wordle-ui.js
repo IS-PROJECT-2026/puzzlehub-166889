@@ -43,7 +43,12 @@
         btn.type = "button";
         btn.id = `key-${key}`;
         btn.className = "wordle-key" + (key === "enter" || key === "back" ? " wide" : "");
-        btn.textContent = key === "back" ? "⌫" : key === "enter" ? "Enter" : key;
+        if (key === "back") {
+          btn.innerHTML = Icons.svg("delete");
+          btn.setAttribute("aria-label", "Backspace");
+        } else {
+          btn.textContent = key === "enter" ? "Enter" : key;
+        }
         btn.addEventListener("click", () => handleKey(key));
         rowEl.appendChild(btn);
       });
@@ -78,6 +83,9 @@
     const validation = WordleGame.validateGuess(currentGuess);
     if (!validation.ok) {
       setMessage(validation.reason);
+      const rowEl = gridEl.children[row];
+      rowEl.classList.add("row-shake");
+      setTimeout(() => rowEl.classList.remove("row-shake"), 400);
       return;
     }
 
@@ -88,6 +96,7 @@
       setTimeout(() => {
         tile.classList.remove("flip");
         tile.classList.add(state);
+        if (state === "correct") tile.classList.add("tile-bounce");
       }, 150);
       paintKeyboard(currentGuess[c], state);
     });
@@ -97,7 +106,12 @@
 
     if (won || isLastRow) {
       gameOver = true;
-      setMessage(won ? "You got it! 🎉" : `Out of guesses — the word was "${answer}".`);
+      if (won) {
+        messageEl.innerHTML = `${Icons.svg("sparkles")} You got it!`;
+      } else {
+        setMessage(`Out of guesses — the word was "${answer}".`);
+      }
+      messageEl.classList.toggle("celebrate", won);
       if (typeof Scoreboard !== "undefined") {
         Scoreboard.record("wordle", { won, guesses: row + 1 });
       }

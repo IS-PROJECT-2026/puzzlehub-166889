@@ -1,0 +1,101 @@
+/* Memory Match-specific layout — colors/spacing come from the shared
+   design system (css/style.css); this file adds the card grid and the
+   3D flip effect. */
+
+.memory-app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+}
+
+.memory-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.memory-stat {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, min(4rem, 18vw));
+  grid-auto-rows: min(4rem, 18vw);
+  gap: var(--space-2);
+}
+
+.memory-card {
+  position: relative;
+  width: min(4rem, 18vw);
+  height: min(4rem, 18vw);
+  cursor: pointer;
+  perspective: 600px;
+  animation: pop-in 0.3s var(--ease-bounce) both;
+  transition: transform 0.15s var(--ease-bounce);
+}
+
+.memory-card:not(.flipped):not(.matched):hover {
+  transform: scale(1.06);
+}
+
+.memory-card.mismatch {
+  animation: shake 0.4s ease;
+}
+
+.memory-card.matched {
+  animation: bounce-in 0.4s var(--ease-bounce);
+}
+
+.memory-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s var(--ease-bounce);
+  transform-style: preserve-3d;
+}
+
+.memory-card.flipped .memory-card-inner,
+.memory-card.matched .memory-card-inner {
+  transform: rotateY(180deg);
+}
+
+
+.memory-card-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  backface-visibility: hidden;
+  font-size: var(--font-size-lg);
+}
+
+.memory-card-face.back {
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 700;
+}
+
+.memory-card-face.front {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  transform: rotateY(180deg);
+  color: var(--color-primary);
+}
+
+.memory-card-face.front .icon {
+  width: 55%;
+  height: 55%;
+}
+
+.memory-card.matched .memory-card-face.front {
+  background: var(--color-correct);
+  border-color: transparent;
+  color: #fff;
+}

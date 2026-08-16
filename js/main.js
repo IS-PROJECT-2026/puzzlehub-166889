@@ -3,4 +3,5 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("PuzzleHub shell loaded.");
+  console.log(`${document.querySelectorAll(".game-card").length} games listed on the landing page.`);
 });
